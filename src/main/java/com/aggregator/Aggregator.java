@@ -1,7 +1,9 @@
 package com.aggregator;
 
 import com.aggregator.model.*;
+import com.aggregator.view.DatabaseView;
 import com.aggregator.view.HtmlView;
+import com.aggregator.view.View;
 
 public class Aggregator {
     private static final String URL_FORMAT="https://jobs.dou.ua/vacancies/?city=%s&search=java";
@@ -16,13 +18,20 @@ public class Aggregator {
         Provider[]providers = { new Provider( new HHStrategy()), new Provider(new MoikrugStrategy()), new Provider( new DouStrategy()), new Provider(new RabotaStrategy())};
 
 
-        HtmlView htmlView = new HtmlView();
-        Model model = new Model(htmlView, providers);
+//        HtmlView htmlView = new HtmlView();
+        DatabaseView databaseView = new DatabaseView();
+        View [] views = {  databaseView};
+
+
+        Model model = new Model(views, providers);
+
+
 //
         Controller controller= new Controller(model);
-        htmlView.setController(controller);
+
+        databaseView.setController(controller);
 //
-        htmlView.userCitySelectEmulationMethod();
+        databaseView.userCitySelectEmulationMethod();
 
 
 

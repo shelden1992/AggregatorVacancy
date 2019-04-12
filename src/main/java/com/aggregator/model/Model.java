@@ -8,12 +8,12 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class Model {
-    View view;
+    View[] view;
     Provider[] providers;
 
-    public Model(View view, Provider... providers) {
+    public Model(View[] view, Provider... providers) {
 
-        if (providers == null|| providers.length==0 || view == null) {
+        if (providers == null || providers.length == 0 || view == null || view.length == 0) {
             throw new IllegalArgumentException("View or array of providers must be not null");
         }
         this.providers=providers;
@@ -32,11 +32,14 @@ public class Model {
 //
 //        }
 
+        for (View views : view
+        ) {
 
-        view.update(
-                Arrays.stream(providers)
-                        .map(f -> f.getJavaVacancies(city))
-                        .flatMap(Collection::stream)
-                        .collect(Collectors.toList()));
+            views.update(
+                    Arrays.stream(providers)
+                            .map(f -> f.getJavaVacancies(city))
+                            .flatMap(Collection::stream)
+                            .collect(Collectors.toList()));
+        }
     }
 }
