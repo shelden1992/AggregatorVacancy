@@ -1,8 +1,7 @@
-package main;
+package com.aggregator;
 
-
-import main.model.*;
-import main.view.HtmlView;
+import com.aggregator.model.*;
+import com.aggregator.view.HtmlView;
 
 public class Aggregator {
     private static final String URL_FORMAT="https://jobs.dou.ua/vacancies/?city=%s&search=java";

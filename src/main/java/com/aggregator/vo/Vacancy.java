@@ -1,4 +1,5 @@
-package main.vo;
+package com.aggregator.vo;
+
 
 import java.util.Objects;
 

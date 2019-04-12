@@ -1,6 +1,6 @@
-package main.model;
+package com.aggregator.model;
 
-import main.vo.Vacancy;
+import  com.aggregator.vo.Vacancy;
 
 import java.util.List;
 

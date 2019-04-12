@@ -1,7 +1,6 @@
-package main;
+package com.aggregator;
 
-
-import main.model.Model;
+import com.aggregator.model.Model;
 
 public class Controller {
     Model model;

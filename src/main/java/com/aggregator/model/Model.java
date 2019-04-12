@@ -1,7 +1,7 @@
-package main.model;
+package com.aggregator.model;
 
 
-import main.view.View;
+import com.aggregator.view.View;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,12 +27,16 @@ public class Model {
 //        for (Provider pr:providers
 //             ) {
 //            if (pr!=null){
-//                view.update(pr.getJavaVacancies(city).stream().collect(Collectors.toList()));
+//                com.aggregator.view.update(pr.getJavaVacancies(city).stream().collect(Collectors.toList()));
 //            }
 //
 //        }
 
 
-        view.update(Arrays.stream(providers).map(f -> f.getJavaVacancies(city)).flatMap(Collection::stream).collect(Collectors.toList()));
+        view.update(
+                Arrays.stream(providers)
+                        .map(f -> f.getJavaVacancies(city))
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.toList()));
     }
 }

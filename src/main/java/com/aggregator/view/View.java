@@ -1,7 +1,8 @@
-package main.view;
+package com.aggregator.view;
 
-import main.Controller;
-import main.vo.Vacancy;
+
+import com.aggregator.Controller;
+import com.aggregator.vo.Vacancy;
 
 import java.util.List;
 
