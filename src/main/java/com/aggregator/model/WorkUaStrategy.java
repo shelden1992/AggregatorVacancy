@@ -39,7 +39,6 @@ public class WorkUaStrategy implements Strategy {
                     String salary=element.getElementsByAttributeValue("class", "nowrap").text();
                     vac.setSalary(salary);
                     vac.setCity(city.toLowerCase());
-                    System.out.println(vac);
                     vacancyList.add(vac);
                 }
             }

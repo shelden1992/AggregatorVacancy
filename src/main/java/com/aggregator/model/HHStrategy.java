@@ -74,6 +74,24 @@ public class HHStrategy implements Strategy { // Этот класс будет 
         return Jsoup.connect(String.format(URL_FORMAT, typeVacancy, city, page)).userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36").referrer("")
                 .get();
     }
+//    private String getCorrectCity (String city){
+//        String cityForURL="";
+//        switch (city.toLowerCase()) {
+//            case "киев":
+//                return cityForURL="kyiv";
+//            case "харків":
+//                return    cityForURL="kharkiv";
+//            case "харьков":
+//                return   cityForURL="kharkiv";
+//            case "київ":
+//                return cityForURL="kyiv";
+//            case "львів":
+//                return cityForURL="lviv";
+//            case "львов":
+//                return   cityForURL="lviv";
+//
+//            default: return "";
+//        }
 
 
 }
