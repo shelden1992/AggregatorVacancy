@@ -12,8 +12,9 @@ public class Controller {
         }
         this.model=model;
     }
-  public   void onCitySelect(String cityName){
-        model.selectCity(cityName);
+  public   void onCitySelectAndTypeVacancy(String typeVacancy, String cityName){
+
+        model.selectCityAndVacancy(typeVacancy, cityName);
     }
 }
 

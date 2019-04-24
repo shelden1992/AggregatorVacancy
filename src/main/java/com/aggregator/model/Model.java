@@ -22,7 +22,7 @@ public class Model {
 
     }
 
-    public void selectCity(String city) {
+    public void selectCityAndVacancy(String typeVacancy, String city) {
 
 //        for (Provider pr:providers
 //             ) {
@@ -37,7 +37,7 @@ public class Model {
 
             views.update(
                     Arrays.stream(providers)
-                            .map(f -> f.getJavaVacancies(city))
+                            .map(f -> f.getJavaVacancies(typeVacancy, city))
                             .flatMap(Collection::stream)
                             .collect(Collectors.toList()));
         }

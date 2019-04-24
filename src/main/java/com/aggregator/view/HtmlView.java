@@ -33,10 +33,10 @@ public class HtmlView implements View {
 
     }
 
-    public void userCitySelectEmulationMethod(){
-
-        controller.onCitySelect("Харьков");
-    }
+//    public void userCitySelectEmulationMethod(){
+//
+//        controller.onCitySelectAndTypeVacancy("Харьков");
+//    }
 
 
     private String getUpdatedFileContent(List<Vacancy> list){

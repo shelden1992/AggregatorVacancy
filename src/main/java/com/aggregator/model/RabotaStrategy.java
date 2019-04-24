@@ -11,17 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RabotaStrategy implements Strategy {
-    String URL_FORMAT="https://rabota.ua/zapros/java/%s/pg%d";
+    String URL_FORMAT="https://rabota.ua/zapros/%s/%s/pg%d";
 
     private int PAGE_VALUE=0;
 
     @Override
-    public List<Vacancy> getVacancies(String searchString) {
+    public List<Vacancy> getVacancies(String typeVacancy, String city) {
 
 
         List<Vacancy> vacancyList=new ArrayList<>();
         try {
-            Document document=getDocument(searchString, PAGE_VALUE);
+            Document document=getDocument(typeVacancy, city, PAGE_VALUE);
 
 
             while (true) {
@@ -43,8 +43,8 @@ public class RabotaStrategy implements Strategy {
                         vacancy1.setTitle(title);
                         String companyName=vacan.getElementsByClass("f-text-dark-bluegray f-visited-enable").text();
                         vacancy1.setCompanyName(companyName);
-                        vacancy1.setCity(searchString);
-                        vacancy1.setSiteName(String.format(URL_FORMAT, searchString, PAGE_VALUE));
+                        vacancy1.setCity(city);
+                        vacancy1.setSiteName(String.format(URL_FORMAT,typeVacancy, city, PAGE_VALUE));
 
 
                         String string=vacan.select("p").attr("onclick");
@@ -71,11 +71,11 @@ public class RabotaStrategy implements Strategy {
 
                 }
                 ++PAGE_VALUE;
-                document=getDocument(searchString, PAGE_VALUE);
+                document=getDocument(typeVacancy, city, PAGE_VALUE);
 
 
             }
-            System.out.printf("Количетво вакансий на сайте %s в городе %s - %d \n", this.getClass().getSimpleName(), searchString, vacancyList.size());
+            System.out.printf("Количетво вакансий на сайте %s в городе %s - %d \n", this.getClass().getSimpleName(), city, vacancyList.size());
 
 
         } catch (IOException e) {
@@ -87,10 +87,11 @@ public class RabotaStrategy implements Strategy {
         return vacancyList;
     }
 
-    protected Document getDocument(String searchString, int page) throws IOException {
-        String s=searchString.toLowerCase();
+    protected Document getDocument(String typeOfVacancy, String city, int page) throws IOException {
+        String vacanc=typeOfVacancy.replaceAll(" ", "-");
 
-        return Jsoup.connect(String.format(URL_FORMAT, s, page)).userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36").referrer("")
+
+        return Jsoup.connect(String.format(URL_FORMAT, vacanc.toLowerCase(), city.toLowerCase(), page)).userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36").referrer("")
                 .get();
     }
 

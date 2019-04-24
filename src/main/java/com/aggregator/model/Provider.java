@@ -8,8 +8,9 @@ public class Provider {  //контекст
     private Strategy strategy;
 
 
- public List<Vacancy> getJavaVacancies(String searchString){
-     return strategy.getVacancies(searchString);
+ public List<Vacancy> getJavaVacancies(String typeVacancy, String city){
+
+     return strategy.getVacancies(typeVacancy, city);
  }
 
     public Strategy getStrategy() {

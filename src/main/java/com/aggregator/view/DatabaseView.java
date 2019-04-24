@@ -3,6 +3,7 @@ package com.aggregator.view;
 import com.aggregator.Controller;
 import com.aggregator.vo.Vacancy;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -26,7 +27,7 @@ public class DatabaseView implements View {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try (InputStream inputStream=DatabaseView.class.getResourceAsStream("/connect.properties")) {
+        try (FileInputStream inputStream=new FileInputStream("/Users/macuser/Desktop/projects/aggregatorVacancy/src/main/resources/connect.properties")) {
             connectionDatasource.load(( inputStream ));
 
         } catch (IOException e) {
@@ -56,15 +57,15 @@ public class DatabaseView implements View {
                 preparedStatement.setString(4, city);
                 preparedStatement.setString(5, companyName);
 
-                preparedStatement.setString(6,salary);
-//                try {
-//
-//
-//                    int i1=Integer.parseInt(salary.replaceAll("[a-zA-Z d]+", ""));
-//                    preparedStatement.setInt(6, i1);
-//                } catch (NumberFormatException e) {
-//                    preparedStatement.setInt(6, 0);
-//                }
+//                preparedStatement.setString(6, salary);
+                try {
+
+
+                    int salaryInt=Integer.parseInt(salary.replaceAll("[а-яА-Я a-zA-Z #@$%^&*()()?\\/:;><.+=&$!,]+", ""));
+                    preparedStatement.setInt(6, salaryInt);
+                } catch (NumberFormatException e) {
+                    preparedStatement.setInt(6, 0);
+                }
 
 
                 preparedStatement.executeUpdate();
@@ -89,7 +90,7 @@ public class DatabaseView implements View {
 
     }
 
-    public void userCitySelectEmulationMethod() {
-        controller.onCitySelect("Харьков");
-    }
+//    public void userCitySelectEmulationMethod() {
+//        controller.onCitySelectAndTypeVacancy("Харьков");
+//    }
 }
