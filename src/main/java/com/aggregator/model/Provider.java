@@ -10,7 +10,7 @@ public class Provider {  //контекст
 
  public List<Vacancy> getJavaVacancies(String typeVacancy, String city){
 
-     return strategy.getVacancies(typeVacancy, city);
+     return strategy.getVacancies(typeVacancy, city );
  }
 
     public Strategy getStrategy() {

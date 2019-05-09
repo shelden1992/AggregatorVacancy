@@ -14,7 +14,7 @@ public class HtmlView implements View {
     private Controller controller;
  private final String filePath = "/Users/macuser/Desktop/projects/aggregatorVacancy/src/main/java/com/aggregator/view/vacancies.html";
     @Override
-    public void update(List<Vacancy> vacancies) {
+    public void update(List<Vacancy> vacancies, String nameDatabase, boolean newDatabase) {
 //<tr class="vacancy template" style="display: none">
 //        <td class="title"><a href="url"></a></td>
 //        <td class="city"></td>

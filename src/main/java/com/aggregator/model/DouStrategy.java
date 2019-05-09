@@ -17,7 +17,9 @@ public class DouStrategy implements Strategy {
     int numberPage=0;
 
     @Override
-    public List<Vacancy> getVacancies(String typeVacancy, String city) {
+    public List<Vacancy> getVacancies(String typeVacancy, String city ) {
+
+        typeVacancy= doСorrectString(typeVacancy);
         List<Vacancy> list=new ArrayList<>();
 
 //        while (true) {
@@ -65,5 +67,15 @@ public class DouStrategy implements Strategy {
             e.printStackTrace();
         }
         return document;
+    }
+
+    private String doСorrectString(String vacancy){
+
+        String s=  vacancy;
+        s = s.replaceAll(" ", "+");
+        s = s.replaceAll("-", "+");
+        s = s.replaceAll("_", "+");
+
+        return  s;
     }
 }

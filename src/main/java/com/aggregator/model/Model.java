@@ -22,7 +22,7 @@ public class Model {
 
     }
 
-    public void selectCityAndVacancy(String typeVacancy, String city) {
+    public void selectCityAndVacancy(String typeVacancy, String city, String nameDatabase, boolean newDatabase) {
 
 //        for (Provider pr:providers
 //             ) {
@@ -39,7 +39,7 @@ public class Model {
                     Arrays.stream(providers)
                             .map(f -> f.getJavaVacancies(typeVacancy, city))
                             .flatMap(Collection::stream)
-                            .collect(Collectors.toList()));
+                            .collect(Collectors.toList()), nameDatabase, newDatabase);
         }
     }
 }

@@ -12,9 +12,9 @@ public class Controller {
         }
         this.model=model;
     }
-  public   void onCitySelectAndTypeVacancy(String typeVacancy, String cityName){
+  public   void onCitySelectAndTypeVacancy(String typeVacancy, String cityName, String nameDatabase, boolean newDatabase){
 
-        model.selectCityAndVacancy(typeVacancy, cityName);
+        model.selectCityAndVacancy(typeVacancy, cityName, nameDatabase, newDatabase);
     }
 }
 

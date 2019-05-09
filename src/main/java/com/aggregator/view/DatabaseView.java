@@ -2,6 +2,7 @@ package com.aggregator.view;
 
 import com.aggregator.Controller;
 import com.aggregator.vo.Vacancy;
+import com.mysql.cj.jdbc.Driver;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,14 +14,16 @@ import java.util.Properties;
 public class DatabaseView implements View {
     private Controller controller;
 
-    private void getUpdatedFileContent(List<Vacancy> list) {
-
-        createTable(list);
+    private void getUpdatedFileContent(List<Vacancy> list, String nameDatabase, boolean newDatabase) {
+        if (newDatabase) {
+            createTable(list, nameDatabase);
+        }
 
 
     }
 
-    public void createTable(List<Vacancy> list) {
+
+    public void createTable(List<Vacancy> list, String nameDatabase) {
         Properties connectionDatasource=new Properties();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -34,9 +37,40 @@ public class DatabaseView implements View {
             e.printStackTrace();
         }
 
+        try (Connection connection=  DriverManager.getConnection(connectionDatasource.getProperty("url"), connectionDatasource.getProperty("user"), connectionDatasource.getProperty("password"))) {
 
-        try (Connection connection=DriverManager.getConnection(connectionDatasource.getProperty("url"), connectionDatasource.getProperty("user"), connectionDatasource.getProperty("password"))) {
+//            closing inbound before receiving peer's close_notify
+//            я хуй его знает может это баг
+// https://github.com/brettwooldridge/HikariCP/issues/1268
+//            new  Driver().connect()
 
+            Statement statement=connection.createStatement();
+//            System.out.println(nameDatabase);
+            statement.executeUpdate("create table " + nameDatabase + " (id int not null, url varchar(150) null, title varchar(150) null, city varchar(100) null, company_name varchar(350) null, salary int null,  primary key (id))");
+            insertIntoDatabase(list, nameDatabase, connection);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+    }
+
+    void insertIntoDatabase(List<Vacancy> list, String nameDatabase, Connection connection) {
+//        Properties connectionDatasource=new Properties();
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try (FileInputStream inputStream=new FileInputStream("/Users/macuser/Desktop/projects/aggregatorVacancy/src/main/resources/connect.properties")) {
+//            connectionDatasource.load(( inputStream ));
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+        try {
             PreparedStatement preparedStatement=null;
             int i=1;
             for (Vacancy vc : list
@@ -47,7 +81,7 @@ public class DatabaseView implements View {
                 String companyName=vc.getCompanyName();
                 String url=vc.getUrl();
 
-                preparedStatement=connection.prepareStatement("insert into vacancy_table (id, url, title, city, company_name, salary) values (?,?,?,?,?,?)");
+                preparedStatement=connection.prepareStatement("insert into " + nameDatabase + " (id, url, title, city, company_name, salary) values (?,?,?,?,?,?)");
 
 
                 preparedStatement.setInt(1, i++);
@@ -75,13 +109,11 @@ public class DatabaseView implements View {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
-    public void update(List<Vacancy> vacancies) {
-        getUpdatedFileContent(vacancies);
+    public void update(List<Vacancy> vacancies, String nameDatabase, boolean newDatabase) {
+        getUpdatedFileContent(vacancies, nameDatabase, newDatabase);
     }
 
     @Override
