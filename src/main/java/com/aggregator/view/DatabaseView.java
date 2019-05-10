@@ -2,17 +2,20 @@ package com.aggregator.view;
 
 import com.aggregator.Controller;
 import com.aggregator.vo.Vacancy;
-import com.mysql.cj.jdbc.Driver;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 public class DatabaseView implements View {
     private Controller controller;
+    public static final Set<String> databaseNameAndCity=new ConcurrentSkipListSet<>();
 
     private void getUpdatedFileContent(List<Vacancy> list, String nameDatabase, boolean newDatabase) {
         if (newDatabase) {
@@ -39,6 +42,9 @@ public class DatabaseView implements View {
 
         try (Connection connection=  DriverManager.getConnection(connectionDatasource.getProperty("url"), connectionDatasource.getProperty("user"), connectionDatasource.getProperty("password"))) {
 
+            // ---->>>>>> to many connection ------->>>>>>>>
+////////////            до 100 клиентов/ секунду           ///////////////
+
 //            closing inbound before receiving peer's close_notify
 //            я хуй его знает может это баг
 // https://github.com/brettwooldridge/HikariCP/issues/1268
@@ -47,6 +53,8 @@ public class DatabaseView implements View {
             Statement statement=connection.createStatement();
 //            System.out.println(nameDatabase);
             statement.executeUpdate("create table " + nameDatabase + " (id int not null, url varchar(150) null, title varchar(150) null, city varchar(100) null, company_name varchar(350) null, salary int null,  primary key (id))");
+            System.out.println("Database was created and add to set of database" + nameDatabase);
+//            databaseNameAndCity.(nameDatabase);
             insertIntoDatabase(list, nameDatabase, connection);
 
         } catch (SQLException e) {
