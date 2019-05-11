@@ -1,7 +1,7 @@
 //package com.aggregator;
 //
 //
-//import com.aggregator.model_dao.*;
+//import com.aggregator.modelDao.*;
 //import com.aggregator.view.DatabaseView;
 //import com.aggregator.view.HtmlView;
 //import com.aggregator.view.View;
@@ -34,11 +34,11 @@
 //        View[] views={databaseView};
 ////
 ////
-//        Model model_dao=new Model(views, providers);
+//        Model modelDao=new Model(views, providers);
 //
 //
 ////
-//        Controller controller=new Controller(model_dao);
+//        Controller controller=new Controller(modelDao);
 //        controller.onCitySelectAndTypeVacancy("java_junior", "", "java_junior", true);
 //
 //        databaseView.setController(controller);

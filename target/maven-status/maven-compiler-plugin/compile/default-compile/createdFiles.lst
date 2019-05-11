@@ -5,9 +5,8 @@ com/aggregator/model/HHStrategy.class
 com/aggregator/model/Model.class
 com/aggregator/view/View.class
 com/aggregator/view/HtmlView.class
-com/aggregator/Aggregator.class
 com/aggregator/view/DatabaseView.class
-com/aggregator/model/MoikrugStrategy.class
 com/aggregator/model/RabotaStrategy.class
 com/aggregator/model/DouStrategy.class
+com/aggregator/model/WorkUaStrategy.class
 com/aggregator/model/Strategy.class

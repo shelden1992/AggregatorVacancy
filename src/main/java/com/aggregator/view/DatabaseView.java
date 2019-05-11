@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 public class DatabaseView implements View {
     private Controller controller;
-    public static final Set<String> databaseNameAndCity=new ConcurrentSkipListSet<>();
+    public static final Set<String> databaseNameAndCity=new ConcurrentSkipListSet(){{add("java_junior");}};
 
     private void getUpdatedFileContent(List<Vacancy> list, String nameDatabase, boolean newDatabase) {
         if (newDatabase) {
@@ -33,7 +33,7 @@ public class DatabaseView implements View {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try (FileInputStream inputStream=new FileInputStream("/Users/macuser/Desktop/projects/aggregatorVacancy/src/main/resources/connect.properties")) {
+        try (FileInputStream inputStream=new FileInputStream("/Users/macuser/Desktop/projects/aggregatorVacancy/src/main/resources/connectToDataBase.properties")) {
             connectionDatasource.load(( inputStream ));
 
         } catch (IOException e) {
@@ -71,7 +71,7 @@ public class DatabaseView implements View {
 //        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
 //        }
-//        try (FileInputStream inputStream=new FileInputStream("/Users/macuser/Desktop/projects/aggregatorVacancy/src/main/resources/connect.properties")) {
+//        try (FileInputStream inputStream=new FileInputStream("/Users/macuser/Desktop/projects/aggregatorVacancy/src/main/resources/connectToDataBase.properties")) {
 //            connectionDatasource.load(( inputStream ));
 //
 //        } catch (IOException e) {
