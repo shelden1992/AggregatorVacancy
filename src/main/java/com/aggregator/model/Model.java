@@ -1,13 +1,18 @@
 package com.aggregator.model;
 
 
+import com.aggregator.view.DatabaseView;
 import com.aggregator.view.View;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class Model {
+
+
     View[] view;
     Provider[] providers;
 
@@ -31,6 +36,12 @@ public class Model {
 //            }
 //
 //        }
+
+
+
+
+
+
 
         for (View views : view
         ) {

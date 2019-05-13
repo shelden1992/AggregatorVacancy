@@ -6,13 +6,14 @@ import java.util.Objects;
 public class Vacancy {
 
 
+    private String title;
+    private String salary;
+    private String city;
 
-private int id;
-   private String title;
-   private String salary;
-   private String city;
-   private String companyName;
-   private String siteName;
+
+
+    private String companyName;
+    private String siteName;
 
     public String getTitle() {
         return title;
@@ -67,7 +68,7 @@ private int id;
     @Override
     public String toString() {
         final StringBuilder sb=new StringBuilder("Vacancy{");
-        sb.append("title='").append(title).append('\'');
+        sb.append(", title='").append(title).append('\'');
         sb.append(", salary='").append(salary).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", companyName='").append(companyName).append('\'');
