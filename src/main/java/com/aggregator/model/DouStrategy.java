@@ -78,4 +78,5 @@ public class DouStrategy implements Strategy {
 
         return  s;
     }
+
 }

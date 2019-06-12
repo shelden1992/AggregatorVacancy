@@ -29,18 +29,6 @@ public class Model {
 
     public void selectCityAndVacancy(String typeVacancy, String city, String nameDatabase, boolean newDatabase) {
 
-//        for (Provider pr:providers
-//             ) {
-//            if (pr!=null){
-//                com.aggregator.view.update(pr.getJavaVacancies(city).stream().collect(Collectors.toList()));
-//            }
-//
-//        }
-
-
-
-
-
 
 
         for (View views : view
